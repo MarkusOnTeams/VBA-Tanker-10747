@@ -11,7 +11,7 @@ Sub DatenSummierenProLandUndMonat()
    strConnection = "DRIVER={Microsoft Excel Driver (*.xls, *.xlsx, *.xlsm, *.xlsb)}; DBQ=" & ThisWorkbook.FullName
 
    tbl_Ziel.UsedRange.Clear
-   tbl_Ziel.Range("A1:D1").Value = Array("Produkt", "Monat", "Land", "Umsatz")
+   tbl_Ziel.Range("A1:E1").Value = Array("Produkt", "Jahr", "Monat", "Land", "Umsatz")
 
    With cn
 
@@ -19,8 +19,8 @@ Sub DatenSummierenProLandUndMonat()
    .Open strConnection
     
    'Abfragestring zusammenbasteln und Abfrage starten
-     strSQL = "SELECT Produkt, MONTH(Datum) as Monat, Land, SUM(Umsatz) as Summe FROM [Quelle$] " & _
-              "WHERE Year(Datum) = '2020' AND Produkt IN (11, 21) GROUP BY Produkt, Land, MONTH(Datum) ORDER BY Produkt, MONTH(Datum)"
+     strSQL = "SELECT Produkt, Year(Datum) as Jahr, MONTH(Datum) as Monat, Land, SUM(Umsatz) as Summe FROM [Quelle$] " & _
+              "WHERE Produkt IN (11, 21) GROUP BY Produkt, Land, Year(Datum), Month(Datum) ORDER BY Produkt, MONTH(Datum)"
 
      Set rs = CreateObject("ADODB.RECORDSET")
      With rs
