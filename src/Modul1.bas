@@ -20,7 +20,7 @@ Sub DatenSummierenProLandUndMonat()
     
    'Abfragestring zusammenbasteln und Abfrage starten
      strSQL = "SELECT Produkt, MONTH(Datum) as Monat, Land, SUM(Umsatz) as Summe FROM [Quelle$] " & _
-              "WHERE Produkt IN (11, 21) GROUP BY Produkt, Land, MONTH(Datum) ORDER BY Produkt, MONTH(Datum)"
+              "WHERE Year(Datum) = '2020' AND Produkt IN (11, 21) GROUP BY Produkt, Land, MONTH(Datum) ORDER BY Produkt, MONTH(Datum)"
 
      Set rs = CreateObject("ADODB.RECORDSET")
      With rs
